@@ -1,25 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans  xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:context="http://www.springframework.org/schema/context"
-        xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
+    <context:component-scan base-package="com.sazakimaeda.spring"/>
 
+<!--    БОЛЬШЕ ЭТО НЕ НУЖНО, МОЖНО ЭТО ВСЁ ЗАМЕНИТЬ 1 АНОТАЦИЕЙ @Component-->
+<!--    <bean id="musicbean1" class="com.sazakimaeda.spring.janr.ClassicalMusic"-->
+<!--    init-method="doMyInit" destroy-method="doMyDestroy" factory-method="getClassicalMusic"/>-->
+<!--    <bean id="musicbean2"  class="com.sazakimaeda.spring.janr.RapMusic"/>-->
+<!--    <bean id="musicbean3" class="com.sazakimaeda.spring.janr.RockMusic"/>-->
 
-    <bean id="musicBean"
-          class="com.sazakimaeda.spring.ClassicalMusic">
-    </bean>
-
-    <bean id="musicPlayer"
+<!--    <bean id="musicPlayer"
           class ="com.sazakimaeda.spring.MusicPlayer">
-        <property name="music" ref="musicBean"/>
-
+        <property name="musicList">
+            <util:list>
+                <ref bean="musicbean1"/>
+                <ref bean="musicbean2"/>
+                <ref bean="musicbean3"/>
+            </util:list>
+        </property>
         <property name="name" value="${musicPlayer.name}"/>
         <property name="volume" value="${musicPlayer.volume}"/>
-    </bean>
+    </bean>-->
+
+
+
+<!--    Короче можешь это раскомментировать, тогда будет работать директория test-->
+
+<!--    <bean id="rl1" class="com.sazakimaeda.spring.test.person.Man"/>-->
+<!--    <bean id="rl2" class="com.sazakimaeda.spring.test.person.Women"/>-->
+<!--    <bean id="rl3" class="com.sazakimaeda.spring.test.person.Debil"/>-->
+<!--    <bean id="rl4" class="com.sazakimaeda.spring.test.person.Genius"/>-->
+<!--    <bean id="raitingList" class="com.sazakimaeda.spring.test.RaitingList"-->
+<!--    scope="prototype" destroy-method="Destroy" init-method="Init">-->
+<!--    <property name="ratings">-->
+<!--    <util:list>-->
+<!--        <ref bean="rl1"/>-->
+<!--        <ref bean="rl2"/>-->
+<!--        <ref bean="rl3"/>-->
+<!--        <ref bean="rl4"/>-->
+<!--    </util:list>-->
+<!--    </property>-->
+<!--    </bean>-->
 
 </beans>

@@ -1,14 +1,32 @@
 package com.sazakimaeda.spring;
 
-import javax.lang.model.element.Name;
+import com.sazakimaeda.spring.janr.ClassicalMusic;
+import com.sazakimaeda.spring.janr.RapMusic;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+@Component
 public class MusicPlayer {
+    private ClassicalMusic classicalMusic;
+   private RapMusic rapMusic;
     private Music music;
+//    private List<Music> musicList = new ArrayList<>();
+
     private String name;
     private int volume;
 
-//IoC
-    public MusicPlayer(Music Music) { this.music = Music; }
+//IoC - ДЛЯ ВСЕГО
+//    @Autowired
+//    public MusicPlayer(Music Music) { this.music = Music; }
+
+// IoC - только для ClassicalMusic and RapMusic
+    @Autowired
+    public MusicPlayer(ClassicalMusic classicalMusic, RapMusic rapMusic) {
+        this.classicalMusic = classicalMusic;
+        this.rapMusic = rapMusic;
+    }
 
 // Если у меня есть созданный конструктор, то джава УДАЛЯЕТ
 // пустой конструткор и пользуется моим созданным. Выше создан конструктор,
@@ -24,13 +42,20 @@ public class MusicPlayer {
 // и устанавливает переменную и устанавливает
 // зависимость MusicPlayer с ref="musicBean"/>
 // property задаёт какие зависимости нужно внедрить.
-    public void setMusic(Music music) { this.music = music; }
 
+//    public void setMusicList(List<Music> musicList) {
+//        this.musicList = musicList;
+//    }
+
+
+// Я получается из интерфейса Music взял переменные
+// и положил их в arraylist musicList и выывел их на экран
     public void playMusic() {
-        System.out.println("Playing music: " + music.getSong());
+//        for (Music music : musicList) {
+            System.out.println("Playing music: " + classicalMusic.getSong());
+            System.out.println("Playing music: " + rapMusic.getSong());
+//        }
     }
-
-
 
 // С помощью геттера я могу выводить имя
     public String getName() { return name; }
