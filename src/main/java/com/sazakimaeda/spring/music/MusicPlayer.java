@@ -1,32 +1,38 @@
-package com.sazakimaeda.spring;
+package com.sazakimaeda.spring.music;
 
-import com.sazakimaeda.spring.janr.ClassicalMusic;
-import com.sazakimaeda.spring.janr.RapMusic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 @Component
+@Scope("prototype")
 public class MusicPlayer {
-    private ClassicalMusic classicalMusic;
-   private RapMusic rapMusic;
-    private Music music;
+//    private ClassicalMusic classicalMusic;
+//    private RapMusic rapMusic;
+
+    private Music music1;
+    private Music music2;
 //    private List<Music> musicList = new ArrayList<>();
 
     private String name;
     private int volume;
 
 //IoC - ДЛЯ ВСЕГО
-//    @Autowired
-//    public MusicPlayer(Music Music) { this.music = Music; }
+    @Autowired
+    public MusicPlayer(@Qualifier("classicalMusic") Music music1,
+                       @Qualifier("rapMusic") Music music2) {
+        this.music1 = music1;
+        this.music2 = music2;
+    }
 
 // IoC - только для ClassicalMusic and RapMusic
-    @Autowired
-    public MusicPlayer(ClassicalMusic classicalMusic, RapMusic rapMusic) {
-        this.classicalMusic = classicalMusic;
-        this.rapMusic = rapMusic;
-    }
+//    @Autowired
+//    public MusicPlayer(ClassicalMusic classicalMusic, RapMusic rapMusic) {
+//        this.classicalMusic = classicalMusic;
+//        this.rapMusic = rapMusic;
+//    }
 
 // Если у меня есть созданный конструктор, то джава УДАЛЯЕТ
 // пустой конструткор и пользуется моим созданным. Выше создан конструктор,
@@ -51,10 +57,13 @@ public class MusicPlayer {
 // Я получается из интерфейса Music взял переменные
 // и положил их в arraylist musicList и выывел их на экран
     public void playMusic() {
-//        for (Music music : musicList) {
-            System.out.println("Playing music: " + classicalMusic.getSong());
-            System.out.println("Playing music: " + rapMusic.getSong());
-//        }
+        System.out.println("Громкость " + volume + " Исполнитель: " + name);
+        for (String music: music1.getSong()) {
+            System.out.println("Playing music: " + music);
+        }
+        for (String music: music2.getSong()) {
+            System.out.println("Playing music: " + music);
+        }
     }
 
 // С помощью геттера я могу выводить имя
@@ -63,11 +72,13 @@ public class MusicPlayer {
 // Короче я в xlm прописал строчку с помощью property
 // <property name="name" value="Face"/>
 // Устанавилваем переменной "name" значение "Face"
+@Value("${musicPlayer.name}")
     public void setName(String name) { this.name = name; }
 // Снова выводим имя с помощью геттера
     public int getVolume() { return volume; }
 // Устанавилваем значения с помощью property
 // <property name="volume" value="50"/>
+@Value("${musicPlayer.volume}")
     public void setVolume(int volume) { this.volume = volume;}
 // Если я хочу устаноавить эти значения, но не через
 // XLM, как указывал выше, а через файл, допустим как я указал

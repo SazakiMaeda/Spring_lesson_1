@@ -1,12 +1,17 @@
 package com.sazakimaeda.spring.test;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.ArrayList;
 
+@Component
 public class RaitingList {
     private List<Ratings> ratings = new ArrayList<>();
     private double midleRaiting;
 
+    @Autowired
     public void setRatings (List<Ratings> ratings) {
         this.ratings = ratings;
     }

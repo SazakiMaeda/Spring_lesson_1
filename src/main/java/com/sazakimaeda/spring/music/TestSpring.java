@@ -1,4 +1,4 @@
-package com.sazakimaeda.spring;
+package com.sazakimaeda.spring.music;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

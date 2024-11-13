@@ -9,16 +9,16 @@
         http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
-    <context:component-scan base-package="com.sazakimaeda.spring"/>
+    <context:component-scan base-package="com.sazakimaeda.spring.music"/>
 
 <!--    БОЛЬШЕ ЭТО НЕ НУЖНО, МОЖНО ЭТО ВСЁ ЗАМЕНИТЬ 1 АНОТАЦИЕЙ @Component-->
-<!--    <bean id="musicbean1" class="com.sazakimaeda.spring.janr.ClassicalMusic"-->
+<!--    <bean id="musicbean1" class="com.sazakimaeda.spring.music.janr.ClassicalMusic"-->
 <!--    init-method="doMyInit" destroy-method="doMyDestroy" factory-method="getClassicalMusic"/>-->
-<!--    <bean id="musicbean2"  class="com.sazakimaeda.spring.janr.RapMusic"/>-->
-<!--    <bean id="musicbean3" class="com.sazakimaeda.spring.janr.RockMusic"/>-->
+<!--    <bean id="musicbean2"  class="com.sazakimaeda.spring.music.janr.RapMusic"/>-->
+<!--    <bean id="musicbean3" class="com.sazakimaeda.spring.music.janr.RockMusic"/>-->
 
 <!--    <bean id="musicPlayer"
-          class ="com.sazakimaeda.spring.MusicPlayer">
+          class ="com.sazakimaeda.spring.music.MusicPlayer">
         <property name="musicList">
             <util:list>
                 <ref bean="musicbean1"/>
