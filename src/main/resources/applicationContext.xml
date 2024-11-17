@@ -9,16 +9,16 @@
         http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
-    <context:component-scan base-package="com.sazakimaeda.spring.music"/>
+    <context:component-scan base-package="lesson1"/>
 
 <!--    БОЛЬШЕ ЭТО НЕ НУЖНО, МОЖНО ЭТО ВСЁ ЗАМЕНИТЬ 1 АНОТАЦИЕЙ @Component-->
-<!--    <bean id="musicbean1" class="com.sazakimaeda.spring.music.janr.ClassicalMusic"-->
+<!--    <bean id="musicbean1" class="lesson1.music.janr.ClassicalMusic"-->
 <!--    init-method="doMyInit" destroy-method="doMyDestroy" factory-method="getClassicalMusic"/>-->
-<!--    <bean id="musicbean2"  class="com.sazakimaeda.spring.music.janr.RapMusic"/>-->
-<!--    <bean id="musicbean3" class="com.sazakimaeda.spring.music.janr.RockMusic"/>-->
+<!--    <bean id="musicbean2"  class="lesson1.music.janr.RapMusic"/>-->
+<!--    <bean id="musicbean3" class="lesson1.music.janr.RockMusic"/>-->
 
 <!--    <bean id="musicPlayer"
-          class ="com.sazakimaeda.spring.music.MusicPlayer">
+          class ="lesson1.music.MusicPlayer">
         <property name="musicList">
             <util:list>
                 <ref bean="musicbean1"/>
@@ -34,11 +34,11 @@
 
 <!--    Короче можешь это раскомментировать, тогда будет работать директория test-->
 
-<!--    <bean id="rl1" class="com.sazakimaeda.spring.test.person.Man"/>-->
-<!--    <bean id="rl2" class="com.sazakimaeda.spring.test.person.Women"/>-->
-<!--    <bean id="rl3" class="com.sazakimaeda.spring.test.person.Debil"/>-->
-<!--    <bean id="rl4" class="com.sazakimaeda.spring.test.person.Genius"/>-->
-<!--    <bean id="raitingList" class="com.sazakimaeda.spring.test.RaitingList"-->
+<!--    <bean id="rl1" class="lesson1.test.person.Man"/>-->
+<!--    <bean id="rl2" class="lesson1.test.person.Women"/>-->
+<!--    <bean id="rl3" class="lesson1.test.person.Debil"/>-->
+<!--    <bean id="rl4" class="lesson1.test.person.Genius"/>-->
+<!--    <bean id="raitingList" class="lesson1.test.RaitingList"-->
 <!--    scope="prototype" destroy-method="Destroy" init-method="Init">-->
 <!--    <property name="ratings">-->
 <!--    <util:list>-->
