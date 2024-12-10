@@ -17,6 +17,7 @@ public class Person {
     @Max(value = 120, message = "You are so older!")
 //    @NotEmpty(message = "You are pidr, empty!")
 //    Кажется для int не работает @NotEmpty
+    @NotNull(message = "Dolbaeb?")
     private int age;
 
     @Email(message = "Write correct email!")
