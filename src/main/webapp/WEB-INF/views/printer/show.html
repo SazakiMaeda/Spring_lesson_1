@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en", xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your printer</title>
+</head>
+<body>
+
+<p> Your name: <span th:text="${device.getName()}">VALUE</span></p>
+<p> Your model: <span th:text="${device.getModel()}">VALUE</span></p>
+<p> Your problem: <span th:text="${device.getProblem()}">VALUE</span></p>
+<p> Your id: <span th:text="${device.getId()}">VALUE</span></p>
+
+<h3><a th:href="@{/printer/{id}/edit(id=${device.getId()})}">Edit printer</a></h3>
+
+<form th:method="DELETE" th:action="@{/printer/{id}(id=${device.id})}">
+    <input type="submit" value="Delete person"/>
+</form>
+
+<h4><a href="/printer"><-- Back</a> </h4>
+
+</body>
+</html>

@@ -6,9 +6,12 @@
 </head>
 <body>
 Hello, CALCULATOR!
-Say 1 num and 2 num and action.
-<a href="/first/calculator?A=1&B=2&action=minus">Request with parameters</a> or
-<a href="/first/calculator?A=1&B=2&action=plus">Request with parameters</a>
+<p>Say 1 num and 2 num and action.</p>
+<a href="/first/calculator?A=1&B=2&action=minus">Request minus</a> or
+<a href="/first/calculator?A=1&B=2&action=plus">Request plus</a> or
+<a href="/first/calculator?value=info">Info</a>
 <p th:text="${message}"/>
+<p th:text="${info}"/>
+
 </body>
 </html>

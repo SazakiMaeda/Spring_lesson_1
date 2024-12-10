@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/first")
 public class FirstController {
+    public static String pidr;
+    public static String nahyi;
     @GetMapping("/hello")
     public String helloPage(@RequestParam(value = "name", required = false) String name,
                             @RequestParam(value = "surname", required = false) String surname,
                             Model model){
         //System.out.println("Privet " + name + " " + surname);
+        pidr = name;
+        nahyi = surname;
         model.addAttribute("message", "Privet " + name + " " + surname);
         return "first/hello";
     }
@@ -24,4 +28,6 @@ public class FirstController {
     public String goodByePage() {
         return "first/goodbye";
     }
+
+
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en", xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+<h3><a href="/printer/new">Create person</a></h3>
+
+<div th:each="device : ${printer}">
+    <a th:href="@{/printer/{id}(id=${device.getId()})}"
+       th:text="${device.name} + ' ' + ${device.model}">Printer</a>
+
+</div>
+
+</body>
+</html>
