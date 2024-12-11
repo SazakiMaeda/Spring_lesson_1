@@ -1,46 +1,47 @@
 package com.sazakimaeda.spring.springMVC.crud.dao;
 
 import com.sazakimaeda.spring.springMVC.crud.models.Person;
+import jakarta.validation.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Arrays.stream;
+
 @Component
 public class PersonDao {
-    private static int PEOPLE_COUNT;
-    private static List<Person> people;
-    {
-        people = new ArrayList<Person>();
+    private final JdbcTemplate jdbcTemplate;
 
-        people.add(new Person("Anton", PEOPLE_COUNT++, "EtoYa", 5, "lox@mail.ru"));
-        people.add(new Person("Bob", PEOPLE_COUNT++, "lox", 32, "bob@mail.ru"));
-        people.add(new Person("Dan", PEOPLE_COUNT++, "Gay",2, "gay@bk.ru"));
-        people.add(new Person("Jack", PEOPLE_COUNT++, "Pidr",555, "jack@yandex.ru.ru"));
-        people.add(new Person("John", PEOPLE_COUNT++, "Foxybloke",-1, "john@gmail.com"));
+    @Autowired
+    public PersonDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
+    public List<Person> index() {
+        return jdbcTemplate.query("SELECT * FROM person",new BeanPropertyRowMapper<>(Person.class));
     }
 
-    public List<Person> index() { return people; }
-
     public Person show(int id) {
-        return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+        return jdbcTemplate.query("SELECT * FROM person WHERE id=?",
+                        new Object[]{id},new BeanPropertyRowMapper<>(Person.class))
+                .stream().findAny().orElse(null);
     }
 
     public void save(Person person) {
-        person.setId(++PEOPLE_COUNT);
-        people.add(person);
+        jdbcTemplate.update("INSERT INTO person VALUES(1, ?, ?, ?, ?)",
+                person.getId(), person.getSurname(), person.getAge(), person.getEmail());
     }
 
     public void update(int id, Person updatedPerson) {
-        Person personToBeUpdated = show(id);
-        personToBeUpdated.setName(updatedPerson.getName());
-        personToBeUpdated.setSurname(updatedPerson.getSurname());
-        personToBeUpdated.setAge(updatedPerson.getAge());
-        personToBeUpdated.setEmail(updatedPerson.getEmail());
+        jdbcTemplate.update("UPDATE person SET name =?, surname =?, age =?, email =? WHERE id=?",
+                updatedPerson.getName(), updatedPerson.getSurname(), updatedPerson.getAge(), updatedPerson.getEmail(),
+        updatedPerson.getId());
     }
 
     public void delete(int id) {
-        people.removeIf(person -> person.getId() == id);
+        jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
     }
 }
